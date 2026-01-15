@@ -1,46 +1,56 @@
-import axios from "axios"
 import { IVoiceAgentService } from "./interface"
+import { VoximplantManagementClient } from "./management-client"
 
 export class VoximplantService implements IVoiceAgentService {
-    private accountId: string
-    private apiKey: string
-    private apiBase: string = "https://api.voximplant.com/platform_api"
+    private client: VoximplantManagementClient | null = null
 
     constructor() {
-        this.accountId = process.env.VOXIMPLANT_ACCOUNT_ID || ""
-        this.apiKey = process.env.VOXIMPLANT_API_KEY || ""
+        const accountId = process.env.VOXIMPLANT_ACCOUNT_ID
+        const keyId = process.env.VOXIMPLANT_KEY_ID
+        // Support PEM directly or path (simplified for now: assume PEM in env or load from file if needed)
+        // For this environment, we expect the PEM content in VOXIMPLANT_PRIVATE_KEY
+        const privateKey = process.env.VOXIMPLANT_PRIVATE_KEY?.replace(/\\n/g, '\n') // Handle env var newlines
 
-        if (!this.accountId || !this.apiKey) {
-            console.warn("Voximplant credentials missing")
+        if (accountId && keyId && privateKey) {
+            this.client = new VoximplantManagementClient({
+                accountId,
+                keyId,
+                privateKey
+            })
+        } else {
+            console.warn("Voximplant Management API credentials missing.")
         }
     }
 
-    async deployAgent(businessId: string, config: { prompt: string; voiceId?: string }): Promise<{ success: boolean; deploymentId?: string }> {
-        // 1. Create or Update Application/Scenario in Voximplant
-        // MVP: We assume a single "Platform" application exists, and we route via logic.
-        // Or we update a Key-Value pair in Voximplant ApplicationStorage for this businessId
+    async deployAgent(businessId: string, config: { prompt?: string; voiceId?: string; scriptCode?: string }): Promise<{ success: boolean; deploymentId?: string }> {
+        if (!this.client) {
+            console.error("Voximplant Client not initialized")
+            return { success: false }
+        }
 
-        // Example: Update ApplicationStorage via HTTP API
         try {
-            // NOTE: Real implementation uses Voximplant Management API to SetKeyValue
-            // This is a placeholder for the actual API call logic
-            const configJson = JSON.stringify(config)
+            // 1. Create/Get Application
+            const appId = await this.client.createApplication("consulting-crm-os")
 
-            // Mock call
-            console.log(`[Voximplant] Deploying config for business ${businessId}: ${configJson}`)
+            // 2. Create/Update Scenario
+            // We expect the FULL script code to be passed in config.scriptCode
+            const script = config.scriptCode || "// Default Placeholder"
+            const scenarioId = await this.client.setScenario("voice-agent-scenario", script)
 
-            // Simulating API latency
-            await new Promise(resolve => setTimeout(resolve, 500))
+            // 3. Bind Rule
+            const ruleId = await this.client.bindRule(appId, scenarioId, "inbound-all")
 
-            return { success: true, deploymentId: `dep_${Date.now()}` }
+            console.log(`[Voximplant] Deployed: App=${appId}, Scenario=${scenarioId}, Rule=${ruleId}`)
+
+            return { success: true, deploymentId: `rule_${ruleId}` }
         } catch (error) {
-            console.error("Voximplant Deploy Error:", error)
+            console.error("Deploy Agent Error:", error)
             return { success: false }
         }
     }
 
     async provisionNumber(businessId: string, areaCode?: string): Promise<{ phoneNumber: string }> {
-        // Mock provisioning
+        // Mock provisioning for now, Management API also supports 'BuyPhoneNumber'
         return { phoneNumber: "+15550199" }
     }
 }
