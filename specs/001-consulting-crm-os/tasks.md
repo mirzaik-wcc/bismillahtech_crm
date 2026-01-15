@@ -46,6 +46,10 @@
 - [x] T017 [US3] Create VoxEngine Scenario script in `voxengine/scenario.js` (Manual Upload/Deploy)
 - [x] T018 [US3] Implement `VoximplantService` (calling VoxEngine API) in `lib/voice/voximplant.ts`
 - [x] T019 [US3] Connect "Deploy Agent" button in UI to `deployAgent` action in `app/actions/voice.ts`
+- [x] T020 [US3] Create API Route for Voice Config in `app/api/voice/config/route.ts`
+- [x] T021 [Deploy] Run local build verification (`npm run build`)
+- [x] T022 [Deploy] Create `amplify.yml` build specification
+- [x] T023 [Deploy] Verify `next.config.ts` settings
 
 ## Implementation Strategy
 - **MVP Scope**: Complete Phase 1, 2, and 3 (US1).
