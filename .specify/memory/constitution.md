@@ -1,50 +1,58 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report:
+- Version change: 0.0.0 → 1.0.0
+- List of modified principles:
+    - [PRINCIPLE_1_NAME] → I. User-Centric Design
+    - [PRINCIPLE_2_NAME] → II. Data Integrity and Security
+    - [PRINCIPLE_3_NAME] → III. Modular and Scalable Architecture
+    - [PRINCIPLE_4_NAME] → IV. Comprehensive Test Coverage
+    - [PRINCIPLE_5_NAME] → V. Thorough Documentation
+- Added sections:
+    - Technology Stack
+    - Development Workflow
+- Removed sections: None
+- Templates requiring updates:
+    - ✅ .specify/templates/plan-template.md
+    - ✅ .specify/templates/spec-template.md
+    - ✅ .specify/templates/tasks-template.md
+- Follow-up TODOs:
+    - TODO(TECHNOLOGY_STACK): Please review and confirm the technology stack.
+-->
+# BismillahTech CRM Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. User-Centric Design
+The user experience is paramount. All development must prioritize ease of use, clarity, and a consistent interface.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Data Integrity and Security
+Customer data is our most critical asset. We must ensure its accuracy, consistency, and protection through robust validation, access control, and encryption.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Modular and Scalable Architecture
+The system must be built with independent, reusable modules to support future growth and easy maintenance.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Comprehensive Test Coverage
+Every feature must be accompanied by a suite of unit, integration, and end-to-end tests to ensure reliability and prevent regressions.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Thorough Documentation
+All code, APIs, and features must be clearly documented to facilitate onboarding, maintenance, and knowledge sharing.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Technology Stack
+<!-- TODO(TECHNOLOGY_STACK): Please review and confirm the technology stack. -->
+The following technology stack is to be used for all new development:
+- **Frontend:** React
+- **Backend:** Node.js with Express.js
+- **Database:** PostgreSQL (Supabase)
+- **Styling:** Tailwind CSS
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
-
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
-
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+## Development Workflow
+The project follows a Git-Flow based workflow.
+1. `main` branch is for production-ready code.
+2. `develop` branch is for ongoing development.
+3. Feature branches are created from `develop` for new features.
+4. All feature branches must be reviewed and approved before being merged into `develop`.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
+This constitution is the single source of truth for all development practices. All pull requests and code reviews must verify compliance with these principles. Any deviation must be justified and approved.
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
-
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2026-01-14 | **Last Amended**: 2026-01-14

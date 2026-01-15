@@ -31,7 +31,11 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- **I. User-Centric Design**: Is the user experience a primary consideration in the feature design?
+- **II. Data Integrity and Security**: Are there measures in place to ensure data integrity and security?
+- **III. Modular and Scalable Architecture**: Is the feature designed in a modular and scalable way?
+- **IV. Comprehensive Test Coverage**: Are there plans for unit, integration, and end-to-end tests?
+- **V. Thorough Documentation**: Is there a plan for documenting the feature, code, and APIs?
 
 ## Project Structure
 
