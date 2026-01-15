@@ -4,6 +4,8 @@ import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { DeployAgentButton } from "./_components/deploy-agent-button"
 
+import { AgentConfigForm } from "./_components/agent-config-form"
+
 interface PageProps {
     params: Promise<{ id: string }>
 }
@@ -43,13 +45,16 @@ export default async function BusinessDashboardPage({ params }: PageProps) {
                         </p>
                     </div>
                     <div className="flex gap-2">
-                        <button className="px-4 py-2 text-sm font-medium border rounded-md hover:bg-muted">
-                            Settings
-                        </button>
                         <DeployAgentButton businessId={business.id} />
                     </div>
                 </div>
             </div>
+
+            {/* Agent Configuration */}
+            <AgentConfigForm
+                businessId={business.id}
+                initialConfig={business.voice_config || { prompt: "You are a helpful assistant.", voiceId: "aura-asteria-en" }}
+            />
 
             {/* Widgets Grid */}
             <div className="grid gap-6 md:grid-cols-3">
@@ -69,6 +74,6 @@ export default async function BusinessDashboardPage({ params }: PageProps) {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
